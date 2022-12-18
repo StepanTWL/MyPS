@@ -48,9 +48,9 @@ def create_vertical_image(image_path):
     pixels = img.load()
 
     # Добавляем вертикальные линии в обратном порядке
-    for h in range(height):#may be width-1
+    for h in range(height):  # may be width-1
         horizontal_line = []
-        for w in range(width):#may be height-1
+        for w in range(width):  # may be height-1
             horizontal_line.append(pixels[w, h])
         image_pixels_list.insert(0, horizontal_line)
 
@@ -67,7 +67,36 @@ def create_left_image(image_path):
     width, height = img.size
     pixels = img.load()
 
+    for h in range(height):  # may be width-1
+        horizontal_line = []
+        for w in range(width):  # may be height-1
+            horizontal_line.append(pixels[w, h])
+        image_pixels_list.insert(horizontal_line, h)
 
+    # Записываем готовые пиксели
+    for w in range(width):
+        for h in range(height):
+            pixels[h, w] = image_pixels_list[h][w]
+    # img.save(f"{int(time.time())}.jpeg")
+
+
+def create_right_image(image_path):
+    image_pixels_list = []
+    img = Image.open(image_path)
+    width, height = img.size
+    pixels = img.load()
+
+    for h in range(height):  # may be width-1
+        horizontal_line = []
+        for w in range(width):  # may be height-1
+            horizontal_line.append(pixels[w, h])
+        image_pixels_list.insert(horizontal_line, height - h - 1)
+
+    # Записываем готовые пиксели
+    for w in range(width):
+        for h in range(height):
+            pixels[h, w] = image_pixels_list[h][w]
+    # img.save(f"{int(time.time())}.jpeg")
 
 
 window = tk.Tk()
