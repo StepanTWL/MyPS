@@ -1,7 +1,8 @@
 import tkinter as tk
-from PIL import Image
+from PIL import Image, ImageTk
 
-text_editor = tk.Text()
+
+# text_editor = tk.Text()
 
 
 def open_file():
@@ -100,15 +101,18 @@ def create_right_image(image_path):
 
 
 window = tk.Tk()
-# icon = tk.PhotoImage(file='Image\icon.png')
-# window.iconphoto(False, icon)
+window.iconphoto(False, tk.PhotoImage(file=r'Image\icon.png'))
 window.config(bg='white')  # белый фон
 window.title('My Photoshop')
 window.geometry('500x600+800+100')
 window.resizable(False, False)  # блокировка изменения размера окна
 
-btn_turn_left = tk.Button(window, text='Left')
-btn_turn_right = tk.Button(window, text='Right')
+image = Image.open(r'Image\turn-left-button.png')
+image = image.resize((20,20), Image.ANTIALIAS)
+image = ImageTk.PhotoImage(image)
+btn_turn_left = tk.Button(window, image=image)
+# image = ImageTk.PhotoImage(file=r'Image\turn-right-button.png-button.png')
+# btn_turn_right = tk.Button(window, image=image)
 btn_mirror_hor = tk.Button(window, text='Hor')
 btn_mirror_vert = tk.Button(window, text='Vert')
 
@@ -126,7 +130,7 @@ our_lable.place(x=100, y=50)
 btn_open.place(x=370, y=550, width=100, height=30)
 btn_save.place(x=260, y=550, width=100, height=30)
 btn_turn_left.place(x=30, y=550, width=30, height=30)
-btn_turn_right.place(x=70, y=550, width=30, height=30)
+# btn_turn_right.place(x=70, y=550, width=30, height=30)
 btn_mirror_hor.place(x=110, y=550, width=30, height=30)
 btn_mirror_vert.place(x=150, y=550, width=30, height=30)
 window.grid_columnconfigure(0, minsize=70)
