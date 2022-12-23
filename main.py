@@ -20,7 +20,13 @@ def open_file():
 
     if filepath != "":
         with open(filepath, "r") as file:
-            image_file = tk.PhotoImage(file=file)
+            image_file = Image.open(filepath)
+            image_file = image_file.resize((300, 300), Image.Resampling.LANCZOS)
+        our_image = ImageTk.PhotoImage(image_file)
+        #our_lable = tk.Label(window)
+        our_lable.image = our_image
+        our_lable['image'] = our_lable.image
+        our_lable.place(x=100, y=50)
 
 
 def save_file():
@@ -133,14 +139,16 @@ btn_mirror_hor = tk.Button(window, image=image_horiz)
 image_vertic = Image.open(r'Image\mirror-vertical-button.png')
 image_vertic = image_vertic.resize((20, 20), Image.Resampling.LANCZOS)
 image_vertic = ImageTk.PhotoImage(image_vertic)
-btn_mirror_vert = tk.Button(window, image=image_vertic)
+btn_mirror_vert = tk.Button(window, image=image_vertic, command=create_vertical_image)
+
+
 
 btn_open = tk.Button(window, text='Open', command=open_file)
 btn_save = tk.Button(window, text='Save', command=save_file)
 
 
 
-our_image = tk.PhotoImage(file=r'Image\no-image.png')
+our_image = ImageTk.PhotoImage(file=r'Image\no-image.png')
 our_lable = tk.Label(window)
 our_lable.image = our_image
 our_lable['image'] = our_lable.image
