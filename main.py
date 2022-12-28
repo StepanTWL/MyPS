@@ -36,20 +36,6 @@ def save_file():
     """
 
 
-def create_horizontal_image(image):
-    image = ImageOps.mirror(image)
-    our_lable.image = ImageTk.PhotoImage(image)
-    our_lable['image'] = our_lable.image
-    our_lable.place(x=100, y=50)
-
-
-def create_vertical_image(image):
-    image = ImageOps.flip(image)
-    our_lable.image = ImageTk.PhotoImage(image)
-    our_lable['image'] = our_lable.image
-    our_lable.place(x=100, y=50)
-
-
 class create_image:
 
     def __init__(self):
@@ -57,7 +43,8 @@ class create_image:
 
     def left(self, image):
         self.count += 1
-        image = image.rotate(angle=90 * self.count, expand=True).copy()
+        #image = image.rotate(angle=90, expand=True)
+        image = image.transpose(Image.Transpose.ROTATE_90)
         our_lable.image = ImageTk.PhotoImage(image)
         our_lable['image'] = our_lable.image
         our_lable.place(x=100, y=50)
@@ -70,13 +57,13 @@ class create_image:
         our_lable.place(x=100, y=50)
 
     def horizontal(self, image):
-        image = ImageOps.mirror(image).copy()
+        image = ImageOps.mirror(image)
         our_lable.image = ImageTk.PhotoImage(image)
         our_lable['image'] = our_lable.image
         our_lable.place(x=100, y=50)
 
     def vertical(self, image):
-        image = ImageOps.flip(image).copy()
+        image = ImageOps.flip(image).convert()
         our_lable.image = ImageTk.PhotoImage(image)
         our_lable['image'] = our_lable.image
         our_lable.place(x=100, y=50)
